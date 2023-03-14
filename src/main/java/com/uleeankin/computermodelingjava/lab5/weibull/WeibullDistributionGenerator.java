@@ -1,10 +1,8 @@
-package com.uleeankin.computermodelingjava.weibull;
+package com.uleeankin.computermodelingjava.lab5.weibull;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class WeibullDistributionGenerator {

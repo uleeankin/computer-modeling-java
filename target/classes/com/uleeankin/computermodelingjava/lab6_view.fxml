@@ -11,7 +11,7 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.RadioButton?>
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.uleeankin.computermodelingjava.Lab6Controller">
+      fx:controller="com.uleeankin.computermodelingjava.lab5.Lab5Controller">
     <HBox spacing="80">
         <VBox>
             <HBox spacing="10">

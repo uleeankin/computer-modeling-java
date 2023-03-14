@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.uleeankin.computermodelingjava.lab6.Lab6Controller">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <HBox spacing="50">
+        <VBox spacing="10">
+            <Label text="A - Откажет хотя бы один узел"/>
+            <Label text="B - Откажет ровно один узел"/>
+            <Label text="C - Откажет ровно два узла"/>
+            <Label text="D - Откажет не менее двух узлов"/>
+            <Label text="Вероятность безотказной работы каждого узла"/>
+            <TextField fx:id="probabilityTextField" maxWidth="100" text="0.8"/>
+            <Label text="Количество экспериментов"/>
+            <TextField fx:id="experimentsNumberTextField" maxWidth="100" text="100000"/>
+            <Button text="Запустить" onAction="#onExperimentsButtonClick"/>
+
+            <Button text="Посчитать теоретические вероятности" onAction="#onTheoreticalProbabilitiesButtonClick"/>
+            <Label text="Теоретические значения"/>
+            <HBox spacing="10">
+                <Label text="p(A) ="/>
+                <Label fx:id="theoreticalAProbabilityLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="p(B) ="/>
+                <Label fx:id="theoreticalBProbabilityLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="p(C) ="/>
+                <Label fx:id="theoreticalCProbabilityLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="p(D) ="/>
+                <Label fx:id="theoreticalDProbabilityLabel"/>
+            </HBox>
+            <Label text="Практические значения"/>
+            <HBox spacing="10">
+                <Label text="p(A) ="/>
+                <Label fx:id="realAProbabilityLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="p(B) ="/>
+                <Label fx:id="realBProbabilityLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="p(C) ="/>
+                <Label fx:id="realCProbabilityLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="p(D) ="/>
+                <Label fx:id="realDProbabilityLabel"/>
+            </HBox>
+        </VBox>
+        <TableView fx:id="table">
+
+        </TableView>
+    </HBox>
+
+</VBox>

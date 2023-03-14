@@ -1,16 +1,16 @@
-package com.uleeankin.computermodelingjava;
+package com.uleeankin.computermodelingjava.lab5;
 
-import com.uleeankin.computermodelingjava.beta.BetaDistributionGenerator;
-import com.uleeankin.computermodelingjava.beta.BetaParametersCalculator;
+import com.uleeankin.computermodelingjava.lab5.beta.BetaDistributionGenerator;
+import com.uleeankin.computermodelingjava.lab5.beta.BetaParametersCalculator;
 import com.uleeankin.computermodelingjava.utils.ControlsDataDisplayer;
 import com.uleeankin.computermodelingjava.utils.Parser;
-import com.uleeankin.computermodelingjava.weibull.WeibullDistributionGenerator;
+import com.uleeankin.computermodelingjava.lab5.weibull.WeibullDistributionGenerator;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 
-public class Lab6Controller {
+public class Lab5Controller {
 
     @FXML
     private TextField sampleSizeValue;

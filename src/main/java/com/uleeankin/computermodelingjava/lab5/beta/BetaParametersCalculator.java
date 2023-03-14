@@ -1,4 +1,4 @@
-package com.uleeankin.computermodelingjava.beta;
+package com.uleeankin.computermodelingjava.lab5.beta;
 
 public class BetaParametersCalculator {
 
