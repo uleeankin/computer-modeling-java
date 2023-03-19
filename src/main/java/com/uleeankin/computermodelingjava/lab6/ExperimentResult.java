@@ -2,6 +2,9 @@ package com.uleeankin.computermodelingjava.lab6;
 
 import javafx.beans.property.SimpleDoubleProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExperimentResult {
 
     private SimpleDoubleProperty p1;
@@ -29,6 +32,23 @@ public class ExperimentResult {
         this.p8 = new SimpleDoubleProperty(p8);
         this.p9 = new SimpleDoubleProperty(p9);
         this.p10 = new SimpleDoubleProperty(p10);
+    }
+
+    public List<Double> toList() {
+        List<Double> list = new ArrayList<>();
+
+        list.add(this.getP1());
+        list.add(this.getP2());
+        list.add(this.getP3());
+        list.add(this.getP4());
+        list.add(this.getP5());
+        list.add(this.getP6());
+        list.add(this.getP7());
+        list.add(this.getP8());
+        list.add(this.getP9());
+        list.add(this.getP10());
+
+        return list;
     }
 
     public double getP1() {

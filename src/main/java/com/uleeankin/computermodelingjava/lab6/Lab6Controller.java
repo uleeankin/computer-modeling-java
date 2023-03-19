@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,7 +25,10 @@ public class Lab6Controller implements Initializable {
     private TextField experimentsNumberTextField;
 
     @FXML
-    private TableView<ExperimentResult> table;
+    private TextField experimentsNumber;
+
+    @FXML
+    private TableView<AllExperimentsResult> table;
 
     @FXML
     private Label theoreticalAProbabilityLabel;
@@ -50,7 +54,7 @@ public class Lab6Controller implements Initializable {
     @FXML
     private Label realDProbabilityLabel;
 
-    private ObservableList<ExperimentResult> tableData = FXCollections.observableArrayList();
+    private ObservableList<AllExperimentsResult> tableData = FXCollections.observableArrayList();
 
     @FXML
     protected void onTheoreticalProbabilitiesButtonClick() {
@@ -59,16 +63,16 @@ public class Lab6Controller implements Initializable {
 
         double p = 1d - Parser.parseTextFieldValueToDouble(this.probabilityTextField);
 
-        theoreticalAProbabilityLabel.setText(
+        this.theoreticalAProbabilityLabel.setText(
                 String.valueOf(calculator.getTheoreticalAProbability(p)));
 
-        theoreticalBProbabilityLabel.setText(
+        this.theoreticalBProbabilityLabel.setText(
                 String.valueOf(calculator.getTheoreticalBProbability(p)));
 
-        theoreticalCProbabilityLabel.setText(
+        this.theoreticalCProbabilityLabel.setText(
                 String.valueOf(calculator.getTheoreticalCProbability(p)));
 
-        theoreticalDProbabilityLabel.setText(
+        this.theoreticalDProbabilityLabel.setText(
                 String.valueOf(calculator.getTheoreticalDProbability(p)));
     }
 
@@ -76,44 +80,95 @@ public class Lab6Controller implements Initializable {
     protected void onExperimentsButtonClick() {
         double p = 1 - Parser.parseTextFieldValueToDouble(this.probabilityTextField);
         int n = Parser.parseTextFieldValueToInt(this.experimentsNumberTextField);
+        int s = Parser.parseTextFieldValueToInt(this.experimentsNumber);
 
         MonteCarloModulator modulator = new MonteCarloModulator();
         this.tableData.clear();
-        this.tableData = modulator.startExperiment(n, tableData);
+        for (int i = 0; i < s; i++) {
+            ObservableList<ExperimentResult> results = FXCollections.observableArrayList();
+            results =  modulator.startExperiment(n, results);
+            double[] probabilities = modulator.countProbability(n, p, results);
 
-        double[] probabilities = modulator.countProbability(n, p, this.tableData);
+            this.tableData.add(new AllExperimentsResult(probabilities[0],
+                    probabilities[1], probabilities[2], probabilities[3]));
+        }
 
-        this.realAProbabilityLabel.setText(String.valueOf(probabilities[0]));
-        this.realBProbabilityLabel.setText(String.valueOf(probabilities[1]));
-        this.realCProbabilityLabel.setText(String.valueOf(probabilities[2]));
-        this.realDProbabilityLabel.setText(String.valueOf(probabilities[3]));
+        MathStatisticCalculator mathStatisticCalculator
+                = new MathStatisticCalculator();
+        ConfidenceInterval confidenceInterval =
+                mathStatisticCalculator.calculateConfidenceInterval(getAProbabilities(this.tableData));
 
+        this.realAProbabilityLabel.setText("{ " +
+                confidenceInterval.getNegative() + " ; " +
+                confidenceInterval.getPositive() + " }");
+
+        confidenceInterval =
+                mathStatisticCalculator.calculateConfidenceInterval(getBProbabilities(this.tableData));
+
+        this.realBProbabilityLabel.setText("{ " +
+                confidenceInterval.getNegative() + " ; " +
+                confidenceInterval.getPositive() + " }");
+
+        confidenceInterval =
+                mathStatisticCalculator.calculateConfidenceInterval(getCProbabilities(this.tableData));
+
+        this.realCProbabilityLabel.setText("{ " +
+                confidenceInterval.getNegative() + " ; " +
+                confidenceInterval.getPositive() + " }");
+
+        confidenceInterval =
+                mathStatisticCalculator.calculateConfidenceInterval(getDProbabilities(this.tableData));
+
+        this.realDProbabilityLabel.setText("{ " +
+                confidenceInterval.getNegative() + " ; " +
+                confidenceInterval.getPositive() + " }");
+    }
+
+    private List<Double> getAProbabilities(ObservableList<AllExperimentsResult> results) {
+        List<Double> aProbabilities = new ArrayList<>();
+        for (int i = 0; i < results.size(); i++) {
+            aProbabilities.add(results.get(i).getPa());
+        }
+        return aProbabilities;
+    }
+
+    private List<Double> getCProbabilities(ObservableList<AllExperimentsResult> results) {
+        List<Double> cProbabilities = new ArrayList<>();
+        for (int i = 0; i < results.size(); i++) {
+            cProbabilities.add(results.get(i).getPc());
+        }
+        return cProbabilities;
+    }
+
+    private List<Double> getBProbabilities(ObservableList<AllExperimentsResult> results) {
+        List<Double> bProbabilities = new ArrayList<>();
+        for (int i = 0; i < results.size(); i++) {
+            bProbabilities.add(results.get(i).getPb());
+        }
+        return bProbabilities;
+    }
+
+    private List<Double> getDProbabilities(ObservableList<AllExperimentsResult> results) {
+        List<Double> dProbabilities = new ArrayList<>();
+        for (int i = 0; i < results.size(); i++) {
+            dProbabilities.add(results.get(i).getPd());
+        }
+        return dProbabilities;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TableColumn p1 = new TableColumn("p1");
-        p1.setCellValueFactory(new PropertyValueFactory<>("p1"));
-        TableColumn p2 = new TableColumn<>("p2");
-        p2.setCellValueFactory(new PropertyValueFactory<>("p2"));
-        TableColumn p3 = new TableColumn<>("p3");
-        p3.setCellValueFactory(new PropertyValueFactory<>("p3"));
-        TableColumn p4 = new TableColumn<>("p4");
-        p4.setCellValueFactory(new PropertyValueFactory<>("p4"));
-        TableColumn p5 = new TableColumn<>("p5");
-        p5.setCellValueFactory(new PropertyValueFactory<>("p5"));
-        TableColumn p6 = new TableColumn<>("p6");
-        p6.setCellValueFactory(new PropertyValueFactory<>("p6"));
-        TableColumn p7 = new TableColumn<>("p7");
-        p7.setCellValueFactory(new PropertyValueFactory<>("p7"));
-        TableColumn p8 = new TableColumn<>("p8");
-        p8.setCellValueFactory(new PropertyValueFactory<>("p8"));
-        TableColumn p9 = new TableColumn<>("p9");
-        p9.setCellValueFactory(new PropertyValueFactory<>("p9"));
-        TableColumn p10 = new TableColumn<>("p10");
-        p10.setCellValueFactory(new PropertyValueFactory<>("p10"));
+        TableColumn p1 = new TableColumn("pa");
+        p1.setCellValueFactory(new PropertyValueFactory<>("pa"));
+        TableColumn p2 = new TableColumn<>("pb");
+        p2.setCellValueFactory(new PropertyValueFactory<>("pb"));
+        TableColumn p3 = new TableColumn<>("pc");
+        p3.setCellValueFactory(new PropertyValueFactory<>("pc"));
+        TableColumn p4 = new TableColumn<>("pd");
+        p4.setCellValueFactory(new PropertyValueFactory<>("pd"));
 
-        this.table.getColumns().addAll(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10);
+
+        this.table.getColumns().addAll(p1, p2, p3, p4);
         this.table.setItems(this.tableData);
     }
 }

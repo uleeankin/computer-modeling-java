@@ -18,4 +18,6 @@ module com.uleeankin.computermodelingjava {
     opens com.uleeankin.computermodelingjava.lab5 to javafx.fxml;
     exports com.uleeankin.computermodelingjava.lab6;
     opens com.uleeankin.computermodelingjava.lab6 to javafx.fxml;
+    exports com.uleeankin.computermodelingjava.lab7;
+    opens com.uleeankin.computermodelingjava.lab7 to javafx.fxml;
 }

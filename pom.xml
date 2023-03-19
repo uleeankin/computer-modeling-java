@@ -86,7 +86,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.uleeankin.computermodelingjava/com.uleeankin.computermodelingjava.Lab6Application
+                                com.uleeankin.computermodelingjava/com.uleeankin.computermodelingjava.LabsApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

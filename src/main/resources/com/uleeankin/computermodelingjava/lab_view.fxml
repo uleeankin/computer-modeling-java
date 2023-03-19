@@ -22,8 +22,11 @@
             <Label text="D - Откажет не менее двух узлов"/>
             <Label text="Вероятность безотказной работы каждого узла"/>
             <TextField fx:id="probabilityTextField" maxWidth="100" text="0.8"/>
+            <Label text="Объем выборки"/>
+            <TextField fx:id="experimentsNumberTextField" maxWidth="100" text="10000"/>
+
             <Label text="Количество экспериментов"/>
-            <TextField fx:id="experimentsNumberTextField" maxWidth="100" text="100000"/>
+            <TextField fx:id="experimentsNumber" maxWidth="100" text="10000"/>
             <Button text="Запустить" onAction="#onExperimentsButtonClick"/>
 
             <Button text="Посчитать теоретические вероятности" onAction="#onTheoreticalProbabilitiesButtonClick"/>
@@ -44,7 +47,7 @@
                 <Label text="p(D) ="/>
                 <Label fx:id="theoreticalDProbabilityLabel"/>
             </HBox>
-            <Label text="Практические значения"/>
+            <Label text="Доверительный интервал"/>
             <HBox spacing="10">
                 <Label text="p(A) ="/>
                 <Label fx:id="realAProbabilityLabel"/>
