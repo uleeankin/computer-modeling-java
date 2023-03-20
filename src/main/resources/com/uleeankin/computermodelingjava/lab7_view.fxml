@@ -27,12 +27,12 @@
 
         <VBox spacing="10">
             <Label text="Правый экран"/>
-            <TextField fx:id="rightScreenTextField" text="1000"/>
+            <TextField fx:id="rightScreenTextField" text="100"/>
         </VBox>
 
         <VBox spacing="10">
             <Label text="Начальная позиция"/>
-            <TextField fx:id="initialPosition" text="450"/>
+            <TextField fx:id="initialPosition" text="45"/>
         </VBox>
 
         <VBox spacing="10">
@@ -41,15 +41,31 @@
         </VBox>
 
         <VBox spacing="10">
+            <Label text="Точность"/>
+            <TextField fx:id="accuracy" text="0.1"/>
+        </VBox>
+
+        <VBox spacing="10">
             <Button text="Запустить" onAction="#onStartButtonClick"/>
         </VBox>
     </HBox>
-    <HBox>
+    <HBox spacing="10">
         <Group fx:id="histogramGroup"/>
         <Group fx:id="functionGroup"/>
         <VBox fx:id="averageWalkTimeBox" visible="false" spacing="10">
             <Label text="Среднее время блуждания"/>
             <Label fx:id="averageWalkTime"/>
+        </VBox>
+
+        <VBox fx:id="partsBox" visible="false" spacing="10">
+            <Label text="Дисперсия"/>
+            <Label fx:id="dispersion"/>
+            <Label text="Первая часть"/>
+            <Label text="Объём выборки"/>
+            <Label fx:id="firstPartSampleSize"/>
+            <Label text="Вторая часть"/>
+            <Label text="Объём выборки"/>
+            <Label fx:id="secondPartSampleSize"/>
         </VBox>
     </HBox>
 

@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 public class Lab7Controller {
 
     private final int SPLIT_SECTION_NUMBER = 15;
+    private final double QUANTILE = 1.96;
 
     @FXML
     private TextField leftScreenTextField;
@@ -29,6 +30,9 @@ public class Lab7Controller {
     private TextField rightStepProbability;
 
     @FXML
+    private TextField accuracy;
+
+    @FXML
     private Group histogramGroup;
 
     @FXML
@@ -39,6 +43,18 @@ public class Lab7Controller {
 
     @FXML
     private VBox averageWalkTimeBox;
+
+    @FXML
+    private Label dispersion;
+
+    @FXML
+    private Label firstPartSampleSize;
+
+    @FXML
+    private Label secondPartSampleSize;
+
+    @FXML
+    private VBox partsBox;
 
     @FXML
     protected void onStartButtonClick() {
@@ -53,6 +69,9 @@ public class Lab7Controller {
         double initialPosition = Parser.parseTextFieldValueToDouble(this.initialPosition);
         double rightStepProbability = Parser.parseTextFieldValueToDouble(
                                             this.rightStepProbability);
+
+        double accuracy = Parser.parseTextFieldValueToDouble(
+                this.accuracy);
 
         RandomWalkSimulator simulator = new RandomWalkSimulator();
 
@@ -70,6 +89,21 @@ public class Lab7Controller {
                 randomWalkTime, this.SPLIT_SECTION_NUMBER, testNumber,
                 this.functionGroup, false, "Статистическая функция");
 
+        this.partsBox.setVisible(true);
+
+        MathStatisticCalculator calculator = new MathStatisticCalculator();
+        double dispersion = calculator.getDispersion(randomWalkTime);
+        double dispersionProximity = accuracy / dispersion;
+
+        this.dispersion.setText(
+                String.valueOf(dispersion));
+        this.firstPartSampleSize.setText(
+                String.valueOf(
+                        calculator.getFirstPartSampleSize(dispersion, this.QUANTILE, accuracy)));
+
+        this.secondPartSampleSize.setText(
+                String.valueOf(
+                        calculator.getSecondPartSampleSize(this.QUANTILE, dispersionProximity)));
     }
 
 }
