@@ -4,9 +4,11 @@ import javafx.collections.ObservableList;
 
 public class MathStatisticCalculator {
 
+    public MathStatisticCalculator() {
+
+    }
+
     public double getDispersion(ObservableList<Double> sample) {
-
-
         double sum = 0d;
         for (double value : sample) {
             sum += value;

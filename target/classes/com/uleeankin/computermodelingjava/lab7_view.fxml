@@ -16,8 +16,13 @@
         </padding>
 
         <VBox spacing="10">
+            <Label text="Число экспериментов"/>
+            <TextField fx:id="experimentNumber" text="1000"/>
+        </VBox>
+
+        <VBox spacing="10">
             <Label text="Число испытаний"/>
-            <TextField fx:id="testNumber" text="10000"/>
+            <TextField fx:id="testNumber" text="1000"/>
         </VBox>
 
         <VBox spacing="10">
@@ -52,20 +57,19 @@
     <HBox spacing="10">
         <Group fx:id="histogramGroup"/>
         <Group fx:id="functionGroup"/>
-        <VBox fx:id="averageWalkTimeBox" visible="false" spacing="10">
-            <Label text="Среднее время блуждания"/>
-            <Label fx:id="averageWalkTime"/>
-        </VBox>
 
         <VBox fx:id="partsBox" visible="false" spacing="10">
             <Label text="Дисперсия"/>
             <Label fx:id="dispersion"/>
-            <Label text="Первая часть"/>
             <Label text="Объём выборки"/>
-            <Label fx:id="firstPartSampleSize"/>
-            <Label text="Вторая часть"/>
-            <Label text="Объём выборки"/>
-            <Label fx:id="secondPartSampleSize"/>
+            <HBox spacing="10">
+                <Label text="Первая часть"/>
+                <Label fx:id="firstPartSampleSize"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Вторая часть"/>
+                <Label fx:id="secondPartSampleSize"/>
+            </HBox>
         </VBox>
     </HBox>
 

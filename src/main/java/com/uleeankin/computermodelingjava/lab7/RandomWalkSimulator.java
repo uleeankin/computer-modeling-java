@@ -7,6 +7,10 @@ import java.util.*;
 
 public class RandomWalkSimulator {
 
+    public RandomWalkSimulator() {
+
+    }
+
     public ObservableList<Double> getRandomWalksTime(int testNumber,
                                                            double leftScreenPosition,
                                                            double rightScreenPosition,
